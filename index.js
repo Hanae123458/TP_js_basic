@@ -116,24 +116,14 @@ const user2 = { profile: { email: "x@y.com" } };
 console.log(user2.profile?.email); // x@y.com
 console.log(user2.address?.city); // undefined
 
-//1. Définit une liste de produits (nom, prix, date d’expiration). 
 const produits = [
-  { nom: "Lait", prix: 10, expireLe: "2025-12-01" },
-  { nom: "Yaourt", prix: 5, expireLe: "2024-01-01" },
-  { nom: "Jus", prix: 8, expireLe: "2026-02-15" },
+ { nom: "Lait", prix: 10, expireLe: "2025-12-01" },
+ { nom: "Yaourt", prix: 5, expireLe: "2024-01-01" },
+ { nom: "Jus", prix: 8, expireLe: "2026-02-15" },
 ];
-
-//2. Filtre les produits non expirés. 
 const aujourdHui = new Date();
-const produitsNonExpires = produits.filter(p => new Date(p.expiration) >= aujourdHui);
-
-//3. Calcule la somme totale.
-const sommeTotale = produitsNonExpires.reduce((total, p) => total + p.prix, 0);
-
-//4. Affiche le résultat formaté. 
-console.log("🛒 Produits non expirés :");
-produitsNonExpires.forEach(p => {
-  console.log(`- ${p.nom} : ${p.prix} DH (expire le ${p.expiration})`);
-});
-
-console.log(`\n💰 Somme totale : ${sommeTotale} DH`);
+const valides = produits.filter(p => new Date(p.expireLe) >
+aujourdHui);
+const total = valides.reduce((s, p) => s + p.prix, 0);
+console.log("Produits valides :", valides);
+console.log("Total :", total, "DH"); 
